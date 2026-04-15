@@ -81,7 +81,3 @@ npm run dev
 - Frontend: React + Vite
 - Backend: Node.js
 - Database: MySQL
-
-## Author
-
-Kegang Peng
