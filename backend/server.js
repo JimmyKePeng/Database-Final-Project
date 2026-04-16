@@ -15,6 +15,7 @@ const PORT = process.env.PORT || 5000;
    AUTH - USER SIGNUP / LOGIN
 ---------------------------- */
 
+//user sign up, add user's info into database
 app.post("/api/users/signup", async (req, res) => {
   try {
     const { email, username, password } = req.body;
@@ -41,6 +42,7 @@ app.post("/api/users/signup", async (req, res) => {
   }
 });
 
+// user login, check user email and password
 app.post("/api/users/login", async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -77,6 +79,8 @@ app.post("/api/users/login", async (req, res) => {
 /* ---------------------------
    ARTISTS
 ---------------------------- */
+
+// get the specific artists id albums
 app.get("/api/artists/:id/albums", async (req, res) => {
   try {
     const { id } = req.params;
@@ -97,6 +101,7 @@ app.get("/api/artists/:id/albums", async (req, res) => {
   }
 });
 
+// get the specific artists id songs
 app.get("/api/artists/:id/songs", async (req, res) => {
   try {
     const { id } = req.params;
@@ -118,6 +123,7 @@ app.get("/api/artists/:id/songs", async (req, res) => {
   }
 });
 
+// get all the artist's info
 app.get("/api/artists", async (req, res) => {
   try {
     const [rows] = await db.execute(
@@ -131,6 +137,7 @@ app.get("/api/artists", async (req, res) => {
   }
 });
 
+// add a new artists into database
 app.post("/api/artists", async (req, res) => {
   try {
     const { email, password, first_name, last_name, country, debut_year } =
@@ -154,6 +161,7 @@ app.post("/api/artists", async (req, res) => {
   }
 });
 
+// get the artist info/albums/songs base on the artists id
 app.get("/api/artists/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -196,6 +204,7 @@ app.get("/api/artists/:id", async (req, res) => {
   }
 });
 
+// artist log in, check email and password
 app.post("/api/artists/login", async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -235,6 +244,8 @@ app.post("/api/artists/login", async (req, res) => {
 /* ---------------------------
    ALBUMS
 ---------------------------- */
+
+// edit an albums on database
 app.put("/api/albums/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -254,6 +265,7 @@ app.put("/api/albums/:id", async (req, res) => {
   }
 });
 
+// delete an albums based on  the albums id
 app.delete("/api/albums/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -267,6 +279,7 @@ app.delete("/api/albums/:id", async (req, res) => {
   }
 });
 
+//get all albums
 app.get("/api/albums", async (req, res) => {
   try {
     const [rows] = await db.execute(`SELECT * FROM Albums`);
@@ -277,6 +290,7 @@ app.get("/api/albums", async (req, res) => {
   }
 });
 
+//add a new albums to database
 app.post("/api/albums", async (req, res) => {
   try {
     const { album_title, release_year, artist_ids } = req.body;
@@ -309,6 +323,7 @@ app.post("/api/albums", async (req, res) => {
   }
 });
 
+//get albums info/artists/songs based on the album id
 app.get("/api/albums/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -351,6 +366,8 @@ app.get("/api/albums/:id", async (req, res) => {
 /* ---------------------------
    SONGS
 ---------------------------- */
+
+// increase the view of a song after someone play it
 app.put("/api/songs/:id/view", async (req, res) => {
   try {
     const { id } = req.params;
@@ -378,15 +395,8 @@ app.put("/api/songs/:id/view", async (req, res) => {
     res.status(500).json({ message: "Failed to update song views" });
   }
 });
-// app.get("/api/songs", async (req, res) => {
-//   try {
-//     const [rows] = await db.execute(`SELECT * FROM Songs`);
-//     res.json(rows);
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ message: "Failed to fetch songs" });
-//   }
-// });
+
+// update a song infor with song id
 app.put("/api/songs/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -406,6 +416,7 @@ app.put("/api/songs/:id", async (req, res) => {
   }
 });
 
+// delete a song with song id
 app.delete("/api/songs/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -419,20 +430,7 @@ app.delete("/api/songs/:id", async (req, res) => {
   }
 });
 
-// app.get("/api/songs", async (req, res) => {
-//   try {
-//     const [rows] = await db.execute(
-//       `SELECT s.song_id, s.song_title, s.duration, s.views, s.album_id, a.album_title
-//        FROM Songs s
-//        LEFT JOIN Albums a ON s.album_id = a.album_id`,
-//     );
-
-//     res.json(rows);
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ message: "Failed to fetch songs" });
-//   }
-// });
+// get all songs
 app.get("/api/songs", async (req, res) => {
   try {
     const [rows] = await db.execute(
@@ -449,6 +447,7 @@ app.get("/api/songs", async (req, res) => {
   }
 });
 
+//add a new song into database
 app.post("/api/songs", async (req, res) => {
   try {
     const { song_title, album_id, duration, artist_ids } = req.body;
@@ -481,6 +480,7 @@ app.post("/api/songs", async (req, res) => {
   }
 });
 
+//get a song info with song id
 app.get("/api/songs/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -516,6 +516,7 @@ app.get("/api/songs/:id", async (req, res) => {
    PLAYLISTS
 ---------------------------- */
 
+// add a new playlist for a user
 app.post("/api/playlists", async (req, res) => {
   try {
     const { user_id, playlist_name } = req.body;
@@ -536,6 +537,7 @@ app.post("/api/playlists", async (req, res) => {
   }
 });
 
+// user's playlist based on user id
 app.get("/api/users/:userId/playlists", async (req, res) => {
   try {
     const { userId } = req.params;
@@ -552,6 +554,7 @@ app.get("/api/users/:userId/playlists", async (req, res) => {
   }
 });
 
+// get playlist info/songs with playlist id
 app.get("/api/playlists/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -584,6 +587,7 @@ app.get("/api/playlists/:id", async (req, res) => {
   }
 });
 
+// add a song into playlist
 app.post("/api/playlists/:id/songs", async (req, res) => {
   try {
     const { id } = req.params;
@@ -602,6 +606,7 @@ app.post("/api/playlists/:id/songs", async (req, res) => {
   }
 });
 
+// delete a song from a playlist
 app.delete("/api/playlists/:playlistId/songs/:songId", async (req, res) => {
   try {
     const { playlistId, songId } = req.params;
@@ -623,6 +628,7 @@ app.delete("/api/playlists/:playlistId/songs/:songId", async (req, res) => {
    LIKES
 ---------------------------- */
 
+// add a song to user's like list
 app.post("/api/songs/:id/like", async (req, res) => {
   try {
     const { id } = req.params;
@@ -641,6 +647,7 @@ app.post("/api/songs/:id/like", async (req, res) => {
   }
 });
 
+// delete a song from user's like list
 app.delete("/api/songs/:id/like/:userId", async (req, res) => {
   try {
     const { id, userId } = req.params;
@@ -658,8 +665,7 @@ app.delete("/api/songs/:id/like/:userId", async (req, res) => {
   }
 });
 
-// User
-
+// get all the user liked songs
 app.get("/api/users/:userId/liked-songs", async (req, res) => {
   try {
     const { userId } = req.params;
