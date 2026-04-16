@@ -37,7 +37,7 @@ Run both SQL files in MySQL before starting the app.
 
 In the `backend/` folder, create a `.env` file.
 
-Use the values in `env.js` as a reference, don't forget to enter your mysql password there.
+Use the values in `env.txt` as a reference, don't forget to enter your mysql password there.
 
 ### 4. Install backend dependencies
 
