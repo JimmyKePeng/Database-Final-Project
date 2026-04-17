@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import API_BASE_URL from "../api";
-
+import { Link } from "react-router-dom";
 function PlaylistDetail() {
   const { id } = useParams();
   const [playlistData, setPlaylistData] = useState(null);
@@ -136,7 +136,9 @@ function PlaylistDetail() {
         <ul>
           {songs.map((song) => (
             <li key={song.song_id}>
-              {song.song_title} - {song.duration}s
+              <Link to={`/songs/${song.song_id}`}>
+                {song.song_title} - {song.duration}s -{song.views} views
+              </Link>
               <button
                 onClick={() => handleRemoveSong(song.song_id)}
                 style={{ marginLeft: "10px" }}

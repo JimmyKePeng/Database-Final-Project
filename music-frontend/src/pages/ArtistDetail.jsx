@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import API_BASE_URL from "../api";
-
+import { Link } from "react-router-dom";
 function ArtistDetail() {
   const { id } = useParams();
   const [artistData, setArtistData] = useState(null);
@@ -49,7 +49,8 @@ function ArtistDetail() {
         <ul>
           {albums.map((album) => (
             <li key={album.album_id}>
-              {album.album_title} ({album.release_year})
+              {/* {album.album_title} ({album.release_year}) */}
+              <Link to={`/albums/${album.album_id}`}>{album.album_title}</Link>
             </li>
           ))}
         </ul>
@@ -62,7 +63,9 @@ function ArtistDetail() {
         <ul>
           {songs.map((song) => (
             <li key={song.song_id}>
-              {song.song_title} - {song.duration}s - {song.views} views
+              <Link to={`/songs/${song.song_id}`}>
+                {song.song_title} - {song.duration}s -{song.views} views
+              </Link>
             </li>
           ))}
         </ul>

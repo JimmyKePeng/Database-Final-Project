@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import API_BASE_URL from "../api";
+import { Link } from "react-router-dom";
 
 function Songs() {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -143,7 +144,13 @@ function Songs() {
 
             return (
               <div key={song.song_id} className="card">
-                <h3>{song.song_title}</h3>
+                <Link
+                  style={{ fontSize: "1.5rem", fontWeight: "bold" }}
+                  to={`/songs/${song.song_id}`}
+                >
+                  {song.song_title}
+                </Link>
+                {/* <h3>{song.song_title}</h3> */}
                 <p>
                   {song.album_title ? `Album: ${song.album_title}` : "No Album"}
                 </p>

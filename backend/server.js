@@ -502,8 +502,17 @@ app.get("/api/songs/:id", async (req, res) => {
       [id],
     );
 
+    const [albums] = await db.execute(
+      `SELECT a.album_id, a.album_title, a.release_year
+       FROM Albums a
+       JOIN Songs s on s.album_id = a.album_id
+       WHERE s.song_id  = ?`,
+      [id],
+    );
+
     res.json({
       song: songRows[0],
+      albums,
       artists,
     });
   } catch (error) {

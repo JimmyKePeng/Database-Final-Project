@@ -3,15 +3,15 @@ import { useParams } from "react-router-dom";
 import API_BASE_URL from "../api";
 import { Link } from "react-router-dom";
 
-function AlbumDetail() {
+function SongDetail() {
   const { id } = useParams();
-  const [albumData, setAlbumData] = useState(null);
+  const [songData, setSongData] = useState(null);
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-    const fetchAlbum = async () => {
+    const fetchSong = async () => {
       try {
-        const response = await fetch(`${API_BASE_URL}/albums/${id}`);
+        const response = await fetch(`${API_BASE_URL}/songs/${id}`);
         const data = await response.json();
 
         if (!response.ok) {
@@ -19,25 +19,26 @@ function AlbumDetail() {
           return;
         }
 
-        setAlbumData(data);
+        setSongData(data);
       } catch (error) {
         console.error(error);
         setMessage("Server error");
       }
     };
 
-    fetchAlbum();
+    fetchSong();
   }, [id]);
 
   if (message) return <p>{message}</p>;
-  if (!albumData) return <p>Loading...</p>;
+  if (!songData) return <p>Loading...</p>;
 
-  const { album, artists, songs } = albumData;
+  const { albums, artists, song } = songData;
 
   return (
     <div>
-      <h2>{album.album_title}</h2>
-      <p>Release Year: {album.release_year}</p>
+      <h2>{song.song_title}</h2>
+      <p>duration: {song.duration}</p>
+      <p>views: {song.views}</p>
 
       <h3>Artists</h3>
       {artists.length === 0 ? (
@@ -55,17 +56,15 @@ function AlbumDetail() {
         </ul>
       )}
 
-      <h3>Songs</h3>
-      {songs.length === 0 ? (
-        <p>No songs found.</p>
+      <h3>Albums</h3>
+      {albums.length === 0 ? (
+        <p>No albums found.</p>
       ) : (
         <ul>
-          {songs.map((song) => (
-            <li key={song.song_id}>
-              <Link to={`/songs/${song.song_id}`}>
-                {song.song_title} - {song.duration}s -{song.views} views
-              </Link>
-              {/* {song.song_title} - {song.duration}s - {song.views} views */}
+          {albums.map((album) => (
+            <li key={album.album_id}>
+              {/* {album.album_title} ({album.release_year}) */}
+              <Link to={`/albums/${album.album_id}`}>{album.album_title}</Link>
             </li>
           ))}
         </ul>
@@ -74,4 +73,4 @@ function AlbumDetail() {
   );
 }
 
-export default AlbumDetail;
+export default SongDetail;

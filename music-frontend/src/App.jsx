@@ -17,6 +17,7 @@ import PlaylistDetail from "./pages/PlaylistDetail";
 import CreateAlbum from "./pages/CreateAlbum";
 import CreateSong from "./pages/CreateSong";
 import ArtistDashboard from "./pages/ArtistDashboard";
+import SongDetail from "./pages/SongDetail";
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
           <Route path="/albums/:id" element={<AlbumDetail />} />
 
           <Route path="/songs" element={<Songs />} />
+          <Route path="/songs/:id" element={<SongDetail />} />
 
           <Route path="/my-playlists" element={<MyPlaylists />} />
           <Route path="/playlists/:id" element={<PlaylistDetail />} />
