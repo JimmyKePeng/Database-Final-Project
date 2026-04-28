@@ -18,7 +18,7 @@ import CreateAlbum from "./pages/CreateAlbum";
 import CreateSong from "./pages/CreateSong";
 import ArtistDashboard from "./pages/ArtistDashboard";
 import SongDetail from "./pages/SongDetail";
-
+import "./index.css";
 function App() {
   return (
     <div>

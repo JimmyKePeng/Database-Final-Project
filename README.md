@@ -1,6 +1,6 @@
 # Project Name
 
-A full-stack website project with a Node.js, mysql backend and a React frontend.
+A full-stack website project with a Node.js, mysql backend and a React frontend with tailwind css.
 
 ## Project Structure
 

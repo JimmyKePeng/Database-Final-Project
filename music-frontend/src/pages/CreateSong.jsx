@@ -97,54 +97,80 @@ function CreateSong() {
   };
 
   return (
-    <div>
-      <h2>Create Song</h2>
-      <p>
-        Logged in as: {artist.first_name} {artist.last_name}
-      </p>
+    <div className="min-h-screen bg-gray-100 px-6 py-10">
+      <div className="mx-auto max-w-xl rounded-3xl bg-white p-8 shadow-lg">
+        <h2 className="mb-2 text-3xl font-bold text-gray-900">Create Song</h2>
 
-      <form onSubmit={handleSubmit} style={{ maxWidth: "400px" }}>
-        <input
-          type="text"
-          name="song_title"
-          placeholder="Song Title"
-          value={formData.song_title}
-          onChange={handleChange}
-          required
-          style={{ width: "100%", marginBottom: "10px", padding: "8px" }}
-        />
+        <p className="mb-6 text-gray-600">
+          Logged in as:{" "}
+          <span className="font-semibold text-gray-800">
+            {artist.first_name} {artist.last_name}
+          </span>
+        </p>
 
-        <select
-          name="album_id"
-          value={formData.album_id}
-          onChange={handleChange}
-          style={{ width: "100%", marginBottom: "10px", padding: "8px" }}
-        >
-          <option value="">No Album</option>
-          {albums.map((album) => (
-            <option key={album.album_id} value={album.album_id}>
-              {album.album_title}
-            </option>
-          ))}
-        </select>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          {/* Song Title */}
+          <input
+            type="text"
+            name="song_title"
+            placeholder="Song Title"
+            value={formData.song_title}
+            onChange={handleChange}
+            required
+            className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-gray-900 shadow-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+          />
 
-        <input
-          type="number"
-          name="duration"
-          placeholder="Duration in seconds"
-          value={formData.duration}
-          onChange={handleChange}
-          required
-          style={{ width: "100%", marginBottom: "10px", padding: "8px" }}
-        />
+          {/* Album Select */}
+          <select
+            name="album_id"
+            value={formData.album_id}
+            onChange={handleChange}
+            className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-gray-900 shadow-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+          >
+            <option value="">No Album</option>
+            {albums.map((album) => (
+              <option key={album.album_id} value={album.album_id}>
+                {album.album_title}
+              </option>
+            ))}
+          </select>
 
-        <button type="submit">Create Song</button>
-      </form>
+          {/* Duration */}
+          <input
+            type="number"
+            name="duration"
+            placeholder="Duration in seconds"
+            value={formData.duration}
+            onChange={handleChange}
+            required
+            className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-gray-900 shadow-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+          />
 
-      {message && <p>{message}</p>}
+          {/* Submit */}
+          <button
+            type="submit"
+            className="w-full rounded-xl bg-purple-600 px-5 py-3 font-medium text-white transition hover:bg-purple-700"
+          >
+            Create Song
+          </button>
+        </form>
 
-      <div style={{ marginTop: "15px" }}>
-        <Link to="/artist-dashboard">Back to Dashboard</Link>
+        {/* Message */}
+        {message && (
+          <p className="mt-4 rounded-lg bg-blue-100 px-4 py-3 text-blue-700">
+            {message}
+          </p>
+        )}
+
+        {/* Back Link */}
+        <div className="mt-6">
+          <Link
+            to="/artist-dashboard"
+            className="font-medium text-blue-600 no-underline transition hover:text-blue-800"
+          >
+            ← Back to Dashboard
+          </Link>
+        </div>
       </div>
     </div>
   );

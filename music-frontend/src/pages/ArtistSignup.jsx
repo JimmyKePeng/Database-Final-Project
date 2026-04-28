@@ -55,8 +55,8 @@ function ArtistSignup() {
   };
 
   return (
-    <div>
-      <h2>Artist Signup</h2>
+    <div className="flex flex-col justify-center items-center">
+      <h2 className="text-3xl  font-bold">Artist Signup</h2>
 
       <form onSubmit={handleSubmit} style={{ maxWidth: "400px" }}>
         <input
@@ -117,7 +117,9 @@ function ArtistSignup() {
           style={{ width: "100%", marginBottom: "10px", padding: "8px" }}
         />
 
-        <button type="submit">Create Artist Account</button>
+        <button type="submit" className="primary-btn">
+          Create Artist Account
+        </button>
       </form>
 
       {message && <p>{message}</p>}

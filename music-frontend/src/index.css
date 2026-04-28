@@ -29,6 +29,7 @@
     font-size: 16px;
   }
 } */
+@import "tailwindcss";
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -58,12 +59,11 @@ body {
 }
 
 a {
-  color: #1f4ed8;
   text-decoration: none;
 }
 
 a:hover {
-  text-decoration: underline;
+  color: blue;
 }
 
 .page {
@@ -111,11 +111,12 @@ button {
 .primary-btn {
   background: #2563eb;
   color: white;
+  font-size: 1.5rem;
 }
 
 .secondary-btn {
-  background: #e5e7eb;
-  color: #111827;
+  background: #2563eb;
+  color: white;
 }
 
 .danger-btn {

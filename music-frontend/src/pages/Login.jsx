@@ -48,38 +48,10 @@ function Login() {
       setMessage("Server error");
     }
   };
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   setMessage("");
-
-  //   try {
-  //     const response = await fetch(`${API_BASE_URL}/users/login`, {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify(formData),
-  //     });
-
-  //     const data = await response.json();
-
-  //     if (!response.ok) {
-  //       setMessage(data.message || "Login failed");
-  //       return;
-  //     }
-
-  //     localStorage.setItem("user", JSON.stringify(data.user));
-  //     setMessage("Login successful");
-  //     navigate("/my-playlists");
-  //   } catch (error) {
-  //     console.error(error);
-  //     setMessage("Server error");
-  //   }
-  // };
 
   return (
-    <div>
-      <h2>Login</h2>
+    <div className="flex flex-col justify-center items-center">
+      <h2 className="text-3xl  font-bold">Login</h2>
 
       <form onSubmit={handleSubmit} style={{ maxWidth: "400px" }}>
         <input
@@ -102,7 +74,9 @@ function Login() {
           style={{ width: "100%", marginBottom: "10px", padding: "8px" }}
         />
 
-        <button type="submit">Login</button>
+        <button type="submit" className="primary-btn text-sm">
+          Login
+        </button>
       </form>
 
       {message && <p>{message}</p>}

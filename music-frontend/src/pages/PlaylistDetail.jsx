@@ -108,47 +108,95 @@ function PlaylistDetail() {
   const { playlist, songs } = playlistData;
 
   return (
-    <div>
-      <h2>{playlist.playlist_name}</h2>
-      <p>Created: {playlist.created_date}</p>
+    <div className="min-h-screen bg-gray-100 px-8 py-10">
+      <div className="mx-auto max-w-4xl space-y-8">
+        {/* Playlist Header */}
+        <div className="rounded-2xl bg-white p-6 shadow-md">
+          <h2 className="mb-2 text-3xl font-bold text-gray-900">
+            {playlist.playlist_name}
+          </h2>
+          <p className="text-gray-600">
+            <span className="font-semibold text-gray-800">Created:</span>{" "}
+            {playlist.created_date}
+          </p>
+        </div>
 
-      <form onSubmit={handleAddSong} style={{ marginBottom: "20px" }}>
-        <select
-          value={selectedSongId}
-          onChange={(e) => setSelectedSongId(e.target.value)}
-          style={{ padding: "8px", marginRight: "10px" }}
-        >
-          <option value="">Select a song</option>
-          {allSongs.map((song) => (
-            <option key={song.song_id} value={song.song_id}>
-              {song.song_title}
-            </option>
-          ))}
-        </select>
+        {/* Add Song Form */}
+        <div className="rounded-2xl bg-white p-6 shadow-md">
+          <h3 className="mb-4 text-2xl font-bold text-gray-900">Add a Song</h3>
 
-        <button type="submit">Add Song</button>
-      </form>
+          <form
+            onSubmit={handleAddSong}
+            className="flex flex-col gap-3 sm:flex-row sm:items-center"
+          >
+            <select
+              value={selectedSongId}
+              onChange={(e) => setSelectedSongId(e.target.value)}
+              className="flex-1 rounded-xl border border-gray-300 bg-white px-4 py-3 text-gray-900 shadow-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+            >
+              <option value="">Select a song</option>
+              {allSongs.map((song) => (
+                <option key={song.song_id} value={song.song_id}>
+                  {song.song_title}
+                </option>
+              ))}
+            </select>
 
-      <h3>Songs in Playlist</h3>
-      {songs.length === 0 ? (
-        <p>No songs in this playlist.</p>
-      ) : (
-        <ul>
-          {songs.map((song) => (
-            <li key={song.song_id}>
-              <Link to={`/songs/${song.song_id}`}>
-                {song.song_title} - {song.duration}s -{song.views} views
-              </Link>
-              <button
-                onClick={() => handleRemoveSong(song.song_id)}
-                style={{ marginLeft: "10px" }}
-              >
-                Remove
-              </button>
-            </li>
-          ))}
-        </ul>
-      )}
+            <button
+              type="submit"
+              className="rounded-xl bg-blue-600 px-5 py-3 font-medium text-white transition hover:bg-blue-700"
+            >
+              Add Song
+            </button>
+          </form>
+        </div>
+
+        {/* Songs in Playlist */}
+        <div className="rounded-2xl bg-white p-6 shadow-md">
+          <h3 className="mb-4 border-b pb-2 text-2xl font-bold text-gray-900">
+            Songs in Playlist
+          </h3>
+
+          {songs.length === 0 ? (
+            <div className="rounded-2xl border border-dashed border-gray-300 bg-gray-50 p-8 text-center">
+              <p className="text-lg text-gray-500">
+                No songs in this playlist.
+              </p>
+              <p className="mt-2 text-sm text-gray-400">
+                Add your first song from the dropdown above.
+              </p>
+            </div>
+          ) : (
+            <ul className="space-y-4">
+              {songs.map((song) => (
+                <li
+                  key={song.song_id}
+                  className="flex flex-col gap-3 rounded-xl bg-gray-50 p-4 transition hover:bg-gray-100 sm:flex-row sm:items-center sm:justify-between"
+                >
+                  <div>
+                    <Link
+                      to={`/songs/${song.song_id}`}
+                      className="text-lg font-semibold text-gray-900 no-underline transition hover:text-blue-600"
+                    >
+                      {song.song_title}
+                    </Link>
+                    <p className="mt-1 text-sm text-gray-500">
+                      {song.duration}s · {song.views} views
+                    </p>
+                  </div>
+
+                  <button
+                    onClick={() => handleRemoveSong(song.song_id)}
+                    className="rounded-lg bg-red-500 px-4 py-2 text-sm font-medium text-white transition hover:bg-red-600"
+                  >
+                    Remove
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </div>
     </div>
   );
 }

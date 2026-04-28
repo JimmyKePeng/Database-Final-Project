@@ -52,8 +52,8 @@ function ArtistLogin() {
   };
 
   return (
-    <div>
-      <h2>Artist Login</h2>
+    <div className="flex flex-col justify-center items-center">
+      <h2 className="text-3xl  font-bold">Artist Login</h2>
 
       <form onSubmit={handleSubmit} style={{ maxWidth: "400px" }}>
         <input
@@ -76,7 +76,9 @@ function ArtistLogin() {
           style={{ width: "100%", marginBottom: "10px", padding: "8px" }}
         />
 
-        <button type="submit">Login as Artist</button>
+        <button type="submit" className="primary-btn text-sm">
+          Login as Artist
+        </button>
       </form>
 
       {message && <p>{message}</p>}

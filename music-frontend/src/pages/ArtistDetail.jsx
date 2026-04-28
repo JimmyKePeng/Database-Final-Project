@@ -34,42 +34,79 @@ function ArtistDetail() {
   const { artist, albums, songs } = artistData;
 
   return (
-    <div>
-      <h2>
-        {artist.first_name} {artist.last_name}
-      </h2>
-      <p>Country: {artist.country}</p>
-      <p>Debut Year: {artist.debut_year}</p>
-      <p>Email: {artist.email}</p>
+    <div className="min-h-screen bg-gray-100 px-8 py-10">
+      <div className="mx-auto grid max-w-6xl grid-cols-1 gap-8 md:grid-cols-3">
+        {/* Artist */}
+        <div className="rounded-2xl bg-white p-6 shadow-md">
+          <h1 className="mb-4 text-3xl font-bold text-gray-900">
+            {artist.first_name} {artist.last_name}
+          </h1>
 
-      <h3>Albums</h3>
-      {albums.length === 0 ? (
-        <p>No albums found.</p>
-      ) : (
-        <ul>
-          {albums.map((album) => (
-            <li key={album.album_id}>
-              {/* {album.album_title} ({album.release_year}) */}
-              <Link to={`/albums/${album.album_id}`}>{album.album_title}</Link>
-            </li>
-          ))}
-        </ul>
-      )}
+          <div className="space-y-2 text-gray-700">
+            <p>
+              <span className="font-semibold">Country:</span> {artist.country}
+            </p>
+            <p>
+              <span className="font-semibold">Debut Year:</span>{" "}
+              {artist.debut_year}
+            </p>
+            <p>
+              <span className="font-semibold">Email:</span> {artist.email}
+            </p>
+          </div>
+        </div>
 
-      <h3>Songs</h3>
-      {songs.length === 0 ? (
-        <p>No songs found.</p>
-      ) : (
-        <ul>
-          {songs.map((song) => (
-            <li key={song.song_id}>
-              <Link to={`/songs/${song.song_id}`}>
-                {song.song_title} - {song.duration}s -{song.views} views
-              </Link>
-            </li>
-          ))}
-        </ul>
-      )}
+        {/* Albums */}
+        <div className="rounded-2xl bg-white p-6 shadow-md">
+          <h3 className="mb-4 border-b pb-2 text-2xl font-bold text-gray-900">
+            Albums
+          </h3>
+
+          {albums.length === 0 ? (
+            <p className="text-gray-500">No albums found.</p>
+          ) : (
+            <ul className="space-y-3">
+              {albums.map((album) => (
+                <li key={album.album_id}>
+                  <Link
+                    to={`/albums/${album.album_id}`}
+                    className="block rounded-lg bg-gray-50 px-4 py-3 text-gray-800 transition hover:bg-gray-200 hover:text-black"
+                  >
+                    {album.album_title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+
+        {/* Songs */}
+        <div className="rounded-2xl bg-white p-6 shadow-md">
+          <h3 className="mb-4 border-b pb-2 text-2xl font-bold text-gray-900">
+            Songs
+          </h3>
+
+          {songs.length === 0 ? (
+            <p className="text-gray-500">No songs found.</p>
+          ) : (
+            <ul className="space-y-3">
+              {songs.map((song) => (
+                <li key={song.song_id}>
+                  <Link
+                    to={`/songs/${song.song_id}`}
+                    className="block rounded-lg bg-gray-50 px-4 py-3 text-gray-800 transition hover:bg-gray-200 hover:text-black"
+                  >
+                    <span className="font-medium">{song.song_title}</span>
+                    <div className="mt-1 text-sm text-gray-500">
+                      {song.duration}s · {song.views} views
+                    </div>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
