@@ -433,11 +433,13 @@ app.delete("/api/songs/:id", async (req, res) => {
 // get all songs
 app.get("/api/songs", async (req, res) => {
   try {
+    const sort = req.query.sort === "asc" ? "ASC" : "DESC";
+
     const [rows] = await db.execute(
       `SELECT s.song_id, s.song_title, s.duration, s.views, s.album_id, a.album_title
        FROM Songs s
        LEFT JOIN Albums a ON s.album_id = a.album_id
-       ORDER BY s.song_title ASC`,
+       ORDER BY s.views ${sort}`
     );
 
     res.json(rows);
@@ -446,6 +448,21 @@ app.get("/api/songs", async (req, res) => {
     res.status(500).json({ message: "Failed to fetch songs" });
   }
 });
+// app.get("/api/songs", async (req, res) => {
+//   try {
+//     const [rows] = await db.execute(
+//       `SELECT s.song_id, s.song_title, s.duration, s.views, s.album_id, a.album_title
+//        FROM Songs s
+//        LEFT JOIN Albums a ON s.album_id = a.album_id
+//        ORDER BY s.views DESC`,
+//     );
+
+//     res.json(rows);
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ message: "Failed to fetch songs" });
+//   }
+// });
 
 //add a new song into database
 app.post("/api/songs", async (req, res) => {
